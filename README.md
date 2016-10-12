@@ -5,7 +5,7 @@ Supervise our congressmen spendings.
 ## Features ##
 
 [**API**](wiki/Api) with every congressman indemnifications budget provided in JSON format.
-Checkout the api queries documentation: [wiki/Api](wiki/Api)
+Checkout the api queries documentation: [/diogolundberg/deputy-overwatch/overview](wiki/Api)
 
 ## Installation ##
 
