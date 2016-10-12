@@ -1,8 +1,12 @@
-from os import getenv
+from os import getenv, listdir, getcwd
+from importlib import import_module
 from flask import Flask
-from overwatch.modules.home .views import mod as home
 
 app = Flask(__name__)
 app.config.from_object('config.' + getenv('ENV', 'Development'))
 
-app.register_blueprint(home)
+modules = [module for module in listdir(getcwd()+'/overwatch/modules') if '.' not in module]
+
+for module in modules:
+    views = import_module('overwatch.modules.%s.views' % module)
+    app.register_blueprint(views.mod)
