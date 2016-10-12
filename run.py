@@ -1,9 +1,5 @@
-from flask import Flask
-app = Flask(__name__)
+from overwatch import app
+from flask.ext.runner import Manager
 
-@app.route("/")
-def index():
-    return "Hello World!"
-
-if __name__ == "__main__":
-    app.run()
+manager = Manager(app)
+manager.run()
