@@ -1,5 +1,4 @@
 from test_base import BaseTestCase
-from mock import patch
 
 
 class IndemnityApiTests(BaseTestCase):
