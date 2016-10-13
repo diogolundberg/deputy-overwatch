@@ -1,12 +1,14 @@
 from os import getenv, listdir, getcwd
 from importlib import import_module
+from re import sub
 from flask import Flask
+
 
 app = Flask(__name__)
 app.config.from_object('config.' + getenv('ENV', 'Development'))
 
-modules = [module for module in listdir(getcwd()+'/overwatch/modules') if '.' not in module]
+controllers = [sub('\.py$', '', c) for c in listdir(getcwd()+'/overwatch/controllers') if c.endswith('_controller.py')]
 
-for module in modules:
-    views = import_module('overwatch.modules.%s.views' % module)
-    app.register_blueprint(views.mod)
+for controller in controllers:
+    module = import_module('overwatch.controllers.%s' % controller)
+    app.register_blueprint(module.blueprint)
