@@ -1,4 +1,3 @@
-from flask import url_for
 from test_base import BaseTestCase
 
 
