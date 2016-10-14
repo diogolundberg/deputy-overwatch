@@ -13,7 +13,7 @@ class IndemnityApiTests(BaseTestCase):
         assert 'indemnities' in response.json
 
     def test_should_respond_ok_to_categories_parent_path(self):
-        response = self.client.get("/api/indemnities/categories/deputies")
+        response = self.client.get("/api/indemnities/categories/deputies/")
         self.assert_200(response)
 
     def test_should_respond_categories_parent_in_a_json(self):
