@@ -1,15 +1,13 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from os import getenv, listdir, getcwd
 from importlib import import_module
 from re import sub
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object('config.' + getenv('ENV', 'Development'))
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 controllers = [sub('\.py$', '', c) for c in listdir(getcwd()+'/overwatch/controllers') if c.endswith('_controller.py')]
 

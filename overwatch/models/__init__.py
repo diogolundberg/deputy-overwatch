@@ -1,0 +1,1 @@
+from deputy import Deputy
