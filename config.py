@@ -8,7 +8,9 @@ class Production(Config):
 
 class Development(Config):
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///overwatch_develop'
 
 class Testing(Config):
     DEBUG = True
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
