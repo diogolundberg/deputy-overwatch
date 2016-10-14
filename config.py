@@ -2,6 +2,7 @@
 class Config(object):
     DEBUG = False
     TESTING = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class Production(Config):
     pass
