@@ -1,4 +1,5 @@
 import factory
+from overwatch import db
 from overwatch.models import Deputy
 from faker import Faker
 from random import choice
@@ -10,10 +11,10 @@ parties = [
     'PEN', 'DEM', 'REDE', 'PHS', 'SEM','PMDB'
 ]
 
-class DeputyFactory(factory.Factory):
+class DeputyFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = Deputy
+        sqlalchemy_session = db.session
 
-    id = factory.LazyAttribute(lambda x: faker.random_int(min=0, max=9999))
     name = factory.LazyAttribute(lambda x: faker.name())
     party = factory.LazyAttribute(lambda x: choice(parties))

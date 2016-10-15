@@ -6,11 +6,6 @@ class Deputy(db.Model):
     name = Column(String(255))
     party = Column(String(255))
 
-    def __init__(self, id, name, party):
-        self.id
-        self.name
-        self.party
-
     def __repr__(self):
         return '<Deputy %s: %s (%s)>' % (self.id, self.name, self.party)
 
