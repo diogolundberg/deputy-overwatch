@@ -1,23 +1,24 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import getenv, listdir, getcwd
+from os import getenv, listdir, getcwd, path
 from importlib import import_module
 from re import sub
+from pattern.en import pluralize, singularize
 
 app = Flask(__name__)
 app.config.from_object('config.' + getenv('ENV', 'Development'))
 
 db = SQLAlchemy(app)
 
-controllers = [sub('\.py$', '', c) for c in listdir(getcwd()+'/overwatch/controllers') if c.endswith('_controller.py')]
+def import_modules(package):
+    package_dir = path.join(getcwd(), __name__, package)
+    module_suffix = '_'+singularize(package)+'.py'
 
-for controller in controllers:
-    module = import_module('overwatch.controllers.%s' % controller)
-    app.register_blueprint(module.blueprint)
+    module_names = [sub('\.py$', '', c) for c in listdir(package_dir) if c.endswith(module_suffix)]
 
+    for module_name in module_names:
+        module = import_module('overwatch.%s.%s' % (package, module_name))
+        app.register_blueprint(module.blueprint)
 
-apis = [sub('\.py$', '', c) for c in listdir(getcwd()+'/overwatch/api') if c.endswith('_api.py')]
-
-for api in apis:
-    module = import_module('overwatch.api.%s' % api)
-    app.register_blueprint(module.blueprint)
+import_modules('controllers')
+import_modules('apis')
