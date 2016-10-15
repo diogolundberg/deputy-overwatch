@@ -10,4 +10,5 @@ class DeputyApiTests(BaseTestCase):
 
     def test_should_respond_deputies_in_a_json(self):
         response = self.client.get('/api/deputies/')
+        assert response.headers['content-type'] == 'application/json'
         assert 'deputies' in response.json

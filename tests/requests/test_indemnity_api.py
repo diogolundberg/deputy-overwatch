@@ -10,6 +10,7 @@ class IndemnityApiTests(BaseTestCase):
 
     def test_should_respond_indemnities_in_a_json(self):
         response = self.client.get('/api/indemnities/')
+        assert response.headers['content-type'] == 'application/json'
         assert 'indemnities' in response.json
 
     def test_should_respond_ok_to_categories_parent_path(self):
@@ -18,4 +19,5 @@ class IndemnityApiTests(BaseTestCase):
 
     def test_should_respond_categories_parent_in_a_json(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
+        assert response.headers['content-type'] == 'application/json'
         assert 'categories' in response.json
