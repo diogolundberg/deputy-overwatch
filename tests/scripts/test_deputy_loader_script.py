@@ -1,5 +1,5 @@
 from test_base import BaseTestCase
-from overwatch.scripts import deputies_loader
+from overwatch.scripts import deputy_loader
 from overwatch.models import Deputy
 
 
@@ -7,7 +7,7 @@ class DeputyLoaderScriptTests(BaseTestCase):
 
 
     def setUp(self):
-        deputies_loader.update_deputies()
+        deputy_loader.update_deputies()
         self.deputies = [dict(d) for d in Deputy.query.all()]
 
 
@@ -32,5 +32,5 @@ class DeputyLoaderScriptTests(BaseTestCase):
 
 
     def test_should_overwrite_existing_data(self):
-        deputies_loader.update_deputies()
+        deputy_loader.update_deputies()
         self.assertEqual(len(self.deputies), 77)
