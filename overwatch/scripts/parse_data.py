@@ -1,8 +1,8 @@
-from urllib2 import urlopen
+import urllib3
 import xmltodict
 
 
 def get_xml_parsed_data(url):
-    response = urlopen(url)
-    data = response.read()
-    return xmltodict.parse(data)
+    http = urllib3.PoolManager()
+    r = http.request('GET', url)
+    return xmltodict.parse(r.data)
