@@ -3,7 +3,7 @@ from overwatch.scripts import deputy_loader
 from overwatch.models import Deputy
 
 
-class DeputyLoaderScriptTests(BaseTestCase):
+class DeputyLoaderTests(BaseTestCase):
 
 
     def setUp(self):
