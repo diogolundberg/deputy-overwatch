@@ -1,6 +1,6 @@
 from overwatch.models import Deputy
+from overwatch.scripts import parse_data
 from overwatch import db
-import parse_data
 
 def update_deputies():
     url = ("http://dadosabertos.almg.gov.br/ws/deputados/em_exercicio")
