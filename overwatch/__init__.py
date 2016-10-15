@@ -10,7 +10,7 @@ app.config.from_object('config.' + getenv('ENV', 'Development'))
 
 db = SQLAlchemy(app)
 
-def import_modules(package):
+def register_blueprints(package):
     package_dir = path.join(getcwd(), __name__, package)
     module_suffix = '_'+singularize(package)+'.py'
 
@@ -20,5 +20,5 @@ def import_modules(package):
         module = import_module('overwatch.%s.%s' % (package, module_name))
         app.register_blueprint(module.blueprint)
 
-import_modules('controllers')
-import_modules('apis')
+register_blueprints('controllers')
+register_blueprints('apis')
