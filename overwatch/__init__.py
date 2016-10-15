@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import getenv, listdir, getcwd, path
 from importlib import import_module
 from re import sub
-from pattern.en import pluralize, singularize
+from inflection import singularize
 
 app = Flask(__name__)
 app.config.from_object('config.' + getenv('ENV', 'Development'))
