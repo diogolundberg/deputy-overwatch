@@ -7,11 +7,18 @@ Supervise our congressmen spendings.
 [**API**](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Api) with every congressman indemnifications budget provided in JSON format.
 Checkout the api queries documentation: [wiki/Api](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Api#markdown-header-examples)
 
+
+## Dependencies ##
+
+Various [**3rd Party libraries**](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Dependencies) are needed in order to run **Deputy Overwatch**.
+Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Dependencies)
+
+
 ## Installation ##
 
 **Deputy Overwatch** is built using [Flask](http://flask.pocoo.org/), an open source Python library for interacting with HTTP. The following steps will require to install the tools listed below:
 
-*   [Python](https://www.python.org/)
+*   [Python 3.5](https://www.python.org/)
 *   [pip](https://pip.pypa.io/en/stable/installing/)
 
 1. Clone from bitbucket (this will create a deputy-overwatch folder in the current directory)
@@ -29,6 +36,40 @@ Checkout the api queries documentation: [wiki/Api](https://bitbucket.org/diogolu
 
         pip install -r requirements.txt
 
-4. Run the site locally!
+4. Create the database
+
+       From the project's folder:
+
+        python run.py db init
+        python run.py db upgrade
+
+4. Scrape data to fill your database
+
+       From the project's folder:
+
+        python run.py scrape
+
+6. Run the site locally!
 
         python run.py runserver
+
+
+## Contribution Guide ##
+
+* Make sure to check where the database is being created(project's root) and get a SQLite client to check it! 
+
+* This project is set up to check pep8 offenses in a pipeline, install a good linter to save time 
+
+* Finally, the **most important**, run tests!
+
+## Running tests ##
+
+I strongly recommend you to run:
+
+     nosetests --ignore-files=scraper
+
+This will ignore the scraper tests, saving a lot of time. The scraping can take up to 8 minutes!
+
+But, if you like to check **every single test**:
+
+     python run.py test
