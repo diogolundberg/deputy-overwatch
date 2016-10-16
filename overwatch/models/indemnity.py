@@ -12,7 +12,7 @@ class Indemnity(db.Model):
     deputy = db.relationship("Deputy", back_populates="indemnities")
 
     def __repr__(self):
-        return '<Indemnity %s, %s>' % self.date, self.category
+        return '<Indemnity %s, %s, deputy:%s>' % (self.date.strftime('%d-%m-%Y'), self.category, self.deputy_id)
 
     def __iter__(self):
         yield 'deputy', dict(self.deputy)
