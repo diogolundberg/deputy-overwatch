@@ -1,0 +1,10 @@
+image: python:3.5.1
+   
+pipelines:
+  default:
+    - step:
+        script:
+          - pip install -r requirements.txt
+
+        pep8:
+          - pep8 *
