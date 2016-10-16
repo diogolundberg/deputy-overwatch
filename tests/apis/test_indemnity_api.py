@@ -27,20 +27,31 @@ class IndemnityApiTests(BaseTestCase):
             self.assertTrue(
                 set(['name', 'party']).issubset(indemnity['deputy']))
 
-    def test_should_have_one_category_with_deputies(self):
+    def test_indemnities_grouped_by_category_should_have_one_category(self):
+        response = self.client.get("/api/indemnities/categories/")
+        self.assertIn('categories', response.json)
+        self.assertEqual(len(response.json['categories']), 1)
+
+    def test_indemnities_grouped_by_category_top5_should_have_5_categories(self):
+        IndemnityFactory.create_batch(40)
+        response = self.client.get("/api/indemnities/categories/?top=5")
+        self.assertIn('categories', response.json)
+        self.assertEqual(len(response.json['categories']), 5)
+
+    def test_indemnities_grouped_by_category_n_deputies_should_have_one_category_with_deputies(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
         categories = response.json['categories']
         self.assertEqual(len(categories), 1)
         for name, category in categories.items():
             self.assertTrue(len(category['deputies']) > 1)
 
-    def test_deputies_grouped_by_category_should_have_total_budget(self):
+    def test_indemnities_grouped_by_category_n_deputies_should_have_total_budget_on_deputies(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
         deputy = response.json['categories']['Single Category']['deputies'][0]
         self.assertTrue(
             set(['name', 'party', 'total_budget']).issubset(deputy.keys()))
 
-    def test_should_have_5_deputies_per_category(self):
+    def test_indemnities_grouped_by_category_n_deputies_top5_should_have_5_deputies_per_category(self):
         response = self.client.get(
             '/api/indemnities/categories/deputies/?top=5')
         deputies = response.json['categories']['Single Category']['deputies']

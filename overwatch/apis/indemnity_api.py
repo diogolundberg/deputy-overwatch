@@ -4,6 +4,7 @@ from webargs import fields
 from webargs.flaskparser import use_args
 from sqlalchemy import desc, func, extract
 from decimal import Decimal
+from inflection import singularize
 
 
 blueprint = Blueprint('indemnity_api', __name__, url_prefix='/api/indemnities')
@@ -15,13 +16,29 @@ def list():
     return jsonify(indemnities=indemnities), 200
 
 
-args = {
+@blueprint.route('/categories/')
+@use_args({
     'top': fields.Integer(required=False)
-}
+})
+def categories(args):
+    top = args.get('top')
+
+    query = Indemnity.query.join(Deputy).with_entities(
+        Indemnity.category,
+        func.sum(Indemnity.value).label("total_budget"),
+    ).group_by(
+        Indemnity.category_id,
+    ).order_by(
+        desc(func.sum(Indemnity.value))
+    )
+
+    return jsonify(categories=group_by_parent_serialize(query, 'categories', top)), 200
 
 
 @blueprint.route('/categories/deputies/')
-@use_args(args)
+@use_args({
+    'top': fields.Integer(required=False)
+})
 def categories_deputies(args):
     top = args.get('top')
 
@@ -37,29 +54,46 @@ def categories_deputies(args):
         desc(func.sum(Indemnity.value))
     )
 
-    return jsonify(categories=parent_child_serialize(query, 'category', 'deputies', top))
+    return jsonify(categories=group_by_parent_parent_serialize(query, 'category', 'deputies', top))
 
 
-def parent_child_serialize(query, parent_column, child_name, top=None):
+def group_by_parent_serialize(query, parent, top=None):
     serializable = {}
-    columns = [c['name']
-               for c in query.column_descriptions if c['name'] != parent_column]
+    child_columns = [c['name'] for c in query.column_descriptions if c['name'] != singularize(parent)]
 
     for result in query.all():
         row = [c for c in result]
         parent_name = row.pop(0)
         child = {}
 
-        for item in row:
-            child_column = columns[row.index(item)]
-            child[child_column] = float(
-                item) if isinstance(item, Decimal) else item
+        for value in row:
+            child_property = child_columns[row.index(value)]
+            child[child_property] = float(value) if isinstance(value, Decimal) else value
 
-        if parent_name in serializable:
-            if not top or len(serializable[parent_name][child_name]) < top:
-                serializable[parent_name][child_name].append(child)
+        if not top or len(serializable) < top:
+            serializable[parent_name] = child
+
+    return serializable
+
+
+def group_by_parent_parent_serialize(query, grand_parent, parent, top=None):
+    serializable = {}
+    child_columns = [c['name'] for c in query.column_descriptions if c['name'] != singularize(grand_parent)]
+
+    for result in query.all():
+        row = [c for c in result]
+        grand_parent_name = row.pop(0)
+        child = {}
+
+        for value in row:
+            child_property = child_columns[row.index(value)]
+            child[child_property] = float(value) if isinstance(value, Decimal) else value
+
+        if grand_parent_name in serializable:
+            if not top or len(serializable[grand_parent_name][parent]) < top:
+                serializable[grand_parent_name][parent].append(child)
         else:
-            serializable[parent_name] = {}
-            serializable[parent_name][child_name] = [child]
+            serializable[grand_parent_name] = {}
+            serializable[grand_parent_name][parent] = [child]
 
     return serializable
