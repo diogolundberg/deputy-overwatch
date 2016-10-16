@@ -7,6 +7,15 @@ Supervise our congressmen spendings.
 [**API**](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Api) with every congressman indemnifications budget provided in JSON format.
 Checkout the api queries documentation: [wiki/Api](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Api#markdown-header-examples)
 
+### Examples ###
+
+* list all deputies
+
+        /api/deputies/
+
+* list indemnities, grouped by categories and deputies
+
+        /api/indemnities/categories/deputies/
 
 ## Dependencies ##
 
