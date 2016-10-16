@@ -26,19 +26,11 @@ def update_indemnities(budget_dates):
                 budgets = [b for b in budget_summary]
 
             for budget in budgets:
-                if isinstance(budget, str):
-                    import pdb; pdb.set_trace()
-                print(budget)
                 indemnity = Indemnity()
                 indemnity.deputy_id = budget['idDeputado']
-                print(indemnity.deputy_id)
                 indemnity.date = datetime.strptime(budget['dataReferencia']['#text'], "%Y-%m-%d")
-                print(indemnity.date)
                 indemnity.category_id = budget['codTipoDespesa']
-                print(indemnity.category_id)
                 indemnity.value = budget['valor']
-                print(indemnity.value)
                 indemnity.category = budget['descTipoDespesa']
-                print(indemnity.category)
                 db.session.merge(indemnity)
             db.session.commit()
