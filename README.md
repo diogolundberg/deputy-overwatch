@@ -40,7 +40,6 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 
        From the project's folder:
 
-        python run.py db init
         python run.py db upgrade
 
 4. Scrape data to fill your database
