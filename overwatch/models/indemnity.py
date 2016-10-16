@@ -17,6 +17,6 @@ class Indemnity(db.Model):
     def __iter__(self):
         yield 'deputy', dict(self.deputy)
         yield 'category_id', self.category_id
-        yield 'date', self.date.strftime('%d-%m-%Y'),
+        yield 'date', self.date.strftime('%d-%m-%Y')
         yield 'category', self.category
         yield 'value', self.value
