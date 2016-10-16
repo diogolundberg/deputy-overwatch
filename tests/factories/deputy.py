@@ -1,9 +1,12 @@
 import factory
+import logging
 from overwatch import db
 from overwatch.models import Deputy
 from faker import Faker
 from random import choice
 
+
+logging.getLogger("factory").setLevel(logging.WARN)
 faker = Faker('pt_BR')
 
 parties = [

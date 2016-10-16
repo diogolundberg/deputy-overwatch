@@ -1,4 +1,5 @@
 import factory
+import logging
 from overwatch import db
 from overwatch.models import Indemnity
 from faker.providers.date_time import Provider
@@ -7,6 +8,7 @@ from factories import DeputyFactory
 from datetime import datetime
 
 
+logging.getLogger("factory").setLevel(logging.WARN)
 faker = Faker('pt_BR')
 faker.add_provider(Provider)
 
