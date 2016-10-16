@@ -13,6 +13,17 @@ Checkout the api queries documentation: [wiki/Api](https://bitbucket.org/diogolu
 Various [**3rd Party libraries**](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Dependencies) are needed in order to run **Deputy Overwatch**.
 Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Dependencies)
 
+* [Flask](http://flask.pocoo.org/)
+* [SQLAlchemy ](http://www.sqlalchemy.org/)
+* [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/)
+* [Flask-Runner](http://flask-runner.readthedocs.io/en/latest/)
+* [Flask-Runner](http://flask-script.readthedocs.io/en/latest/)
+* [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+* [Faker](http://faker.readthedocs.io/en/master/index.html)
+* [factory_boy](https://factoryboy.readthedocs.io/en/latest/)
+* [inflection](https://inflection.readthedocs.io/en/latest/)
+* [xmltodict](https://github.com/martinblech/xmltodict)
+* [webargs](https://webargs.readthedocs.io/en/latest/)
 
 ## Installation ##
 
