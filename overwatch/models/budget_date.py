@@ -1,7 +1,7 @@
 from overwatch import db
 from overwatch.models import Deputy
 from sqlalchemy import Column, ForeignKey, Integer, Date
-from sqlalchemy.ext.declarative import declared_attr
+
 
 class BudgetDate(db.Model):
     date = Column(Date, primary_key=True)
