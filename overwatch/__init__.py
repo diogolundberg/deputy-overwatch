@@ -6,7 +6,7 @@ from re import sub
 from inflection import singularize
 
 
-app = Flask(__name__, template_folder=path.join(getcwd(),__name__, 'views'))
+app = Flask(__name__, template_folder=path.join(getcwd(), __name__, 'views'))
 print(path.join(getcwd(), 'views'))
 app.config.from_object('config.' + getenv('ENV', 'Development'))
 
