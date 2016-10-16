@@ -9,7 +9,7 @@ class IndemnityApiTests(BaseTestCase):
 
     def setUp(self):
         IndemnityFactory.create_batch(
-            20, category='Śingle Category', category_id=1)
+            20, category='Single Category', category_id=1)
 
     def test_should_return_20_indemnities(self):
         response = self.client.get("/api/indemnities/")
@@ -36,6 +36,12 @@ class IndemnityApiTests(BaseTestCase):
 
     def test_deputies_grouped_by_category_should_have_total_budget(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
-        deputy = response.json['categories']['Śingle Category']['deputies'][0]
+        deputy = response.json['categories']['Single Category']['deputies'][0]
         self.assertTrue(
             set(['name', 'party', 'total_budget']).issubset(deputy.keys()))
+
+    def test_should_have_5_deputies_per_category(self):
+        response = self.client.get(
+            '/api/indemnities/categories/deputies/?top=5')
+        deputies = response.json['categories']['Single Category']['deputies']
+        self.assertEqual(len(deputies), 5)

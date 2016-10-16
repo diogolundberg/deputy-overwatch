@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from overwatch.models import Indemnity, Deputy
 from webargs import fields
 from webargs.flaskparser import use_args
-from sqlalchemy import desc, func
+from sqlalchemy import desc, func, extract
 from decimal import Decimal
 
 
@@ -56,7 +56,7 @@ def parent_child_serialize(query, parent_column, child_name, top=None):
                 item) if isinstance(item, Decimal) else item
 
         if parent_name in serializable:
-            if not top or len(serializable[parent_name]) < top:
+            if not top or len(serializable[parent_name][child_name]) < top:
                 serializable[parent_name][child_name].append(child)
         else:
             serializable[parent_name] = {}
