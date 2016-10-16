@@ -15,3 +15,9 @@ class IndemnityApiTests(BaseTestCase):
         response = self.client.get("/api/indemnities/")
         for indemnity in response.json['indemnities']:
             self.assertTrue(set(['category','value']).issubset(indemnity))
+
+    def test_each_indemnity_in_json_should_have_a_deputy(self):
+        response = self.client.get("/api/indemnities/")
+        for indemnity in response.json['indemnities']:
+            self.assertIn('deputy', indemnity)
+            self.assertTrue(set(['name','party']).issubset(indemnity['deputy']))
