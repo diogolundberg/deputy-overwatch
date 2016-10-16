@@ -1,10 +1,6 @@
-from sys import version_info
-from importlib import import_module
 import xmltodict
-import urllib3
 import asyncio
 import aiohttp
-import concurrent
 
 loop = asyncio.get_event_loop()
 semaphore = asyncio.Semaphore(5)
