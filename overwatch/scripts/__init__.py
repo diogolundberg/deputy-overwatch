@@ -1,1 +1,1 @@
-from overwatch.scripts import parse_data
+from overwatch.scripts import scrapper
