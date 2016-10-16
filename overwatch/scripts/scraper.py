@@ -1,3 +1,4 @@
+from overwatch import app
 import xmltodict
 import asyncio
 import aiohttp
@@ -11,6 +12,8 @@ def fetch_urls(urls, parser):
             response = await aiohttp.request('GET', url)
             content = await response.read()
             await asyncio.sleep(1)
+            if app.debug:
+                print('Fetch: {url} <Status {status}>'.format(url=url, status=response.status))
             return parser(content)
 
     urls_to_fetch = [fetch(url) for url in urls]
