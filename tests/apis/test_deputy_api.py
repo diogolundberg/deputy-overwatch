@@ -1,5 +1,6 @@
 from test_base import BaseTestCase
-from factories.deputy import DeputyFactory
+from factories import DeputyFactory
+
 
 class DeputyApiTests(BaseTestCase):
 
