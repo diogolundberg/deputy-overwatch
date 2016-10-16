@@ -1,0 +1,87 @@
+    
+body {
+    background: #F8F8F8;
+    font-family: "Open Sans", sans-serif;
+}
+
+.block {display: block;}
+.muted {color: #999999}
+.auto {
+    overflow: auto;
+    height: 35vh
+}
+.hidden-content {
+    display: none;
+}
+
+h1 {
+    font-weight: 100;
+    margin-bottom: .8em;
+}
+h1 .label {
+    font-size: .5em;
+    display: inline-block;
+    position: relative;
+    top: -3px;
+}
+h2 {
+    font-weight: 300;
+}
+h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .05em;
+}
+h5 {
+    font-weight: bold
+}
+.well > .sections-container > h3 {
+    margin-top: 0
+}
+label {
+    font-weight: 600;
+}
+
+.btn-primary .fa-stack .fa-inverse{
+    color: #DE003D;
+}
+h3 + .btn-toolbar{
+    margin-bottom: 15px;
+}
+.btn-success-on-active.active {
+    background: #DFF0D8
+}
+.btn-warning-on-active.active {
+    background: #FCF8E3
+}
+.btn-danger-on-active.active {
+    background: #F2DEDE
+}
+
+.panel .panel-body h2 {
+  margin: .2em auto .6em;
+}
+.panel .panel-title .collapsed > .fa:first-child {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.tooltip {
+    width: 150px;
+}
+
+.selectpicker,
+.bootstrap-select {
+    width: auto !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav .bootstrap-select {
+        padding-top: 7px;
+    }
+}
+
