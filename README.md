@@ -17,6 +17,10 @@ Checkout the api queries documentation: [wiki/Api](https://bitbucket.org/diogolu
 
         /api/indemnities/categories/deputies/
 
+* list indemnities, grouped by categories and deputies, but only top5 deputies
+
+        /api/indemnities/categories/deputies/?top=5
+
 ## Dependencies ##
 
 Various [**3rd Party libraries**](https://bitbucket.org/diogolundberg/deputy-overwatch/wiki/Dependencies) are needed in order to run **Deputy Overwatch**.
