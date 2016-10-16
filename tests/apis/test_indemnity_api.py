@@ -6,24 +6,26 @@ from decimal import Decimal
 
 
 class IndemnityApiTests(BaseTestCase):
-    
+
     def setUp(self):
-        IndemnityFactory.create_batch(20, category='Śingle Category', category_id=1)
+        IndemnityFactory.create_batch(
+            20, category='Śingle Category', category_id=1)
 
     def test_should_return_20_indemnities(self):
         response = self.client.get("/api/indemnities/")
         self.assertEqual(len(response.json['indemnities']), 20)
-        
+
     def test_each_indemnity_in_json_should_have_category_and_value(self):
         response = self.client.get("/api/indemnities/")
         for indemnity in response.json['indemnities']:
-            self.assertTrue(set(['category','value']).issubset(indemnity))
+            self.assertTrue(set(['category', 'value']).issubset(indemnity))
 
     def test_each_indemnity_in_json_should_have_a_deputy(self):
         response = self.client.get("/api/indemnities/")
         for indemnity in response.json['indemnities']:
             self.assertIn('deputy', indemnity)
-            self.assertTrue(set(['name','party']).issubset(indemnity['deputy']))
+            self.assertTrue(
+                set(['name', 'party']).issubset(indemnity['deputy']))
 
     def test_should_have_one_category_with_deputies(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
@@ -35,6 +37,5 @@ class IndemnityApiTests(BaseTestCase):
     def test_deputies_grouped_by_category_should_have_total_budget(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
         deputy = response.json['categories']['Śingle Category']['deputies'][0]
-        self.assertTrue(set(['name','party','total_budget']).issubset(deputy.keys()))
-
-            
+        self.assertTrue(
+            set(['name', 'party', 'total_budget']).issubset(deputy.keys()))

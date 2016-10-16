@@ -12,13 +12,15 @@ faker.add_provider(Provider)
 
 
 class IndemnityFactory(factory.alchemy.SQLAlchemyModelFactory):
+
     class Meta:
         model = Indemnity
         sqlalchemy_session = db.session
 
     deputy = factory.SubFactory(DeputyFactory)
-    category_id = factory.LazyAttribute(lambda x: faker.random_int(min=0, max=9999))
-    date = factory.LazyAttribute(lambda x: datetime.strptime(faker.date(pattern="%Y-%m-%d"), "%Y-%m-%d"))
+    category_id = factory.LazyAttribute(
+        lambda x: faker.random_int(min=0, max=9999))
+    date = factory.LazyAttribute(
+        lambda x: datetime.strptime(faker.date(pattern="%Y-%m-%d"), "%Y-%m-%d"))
     value = factory.LazyAttribute(lambda x: faker.numerify(text="####,#"))
     category = factory.LazyAttribute(lambda x: faker.job())
-

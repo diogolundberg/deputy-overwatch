@@ -6,12 +6,16 @@ class Config(object):
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+
 class Production(Config):
     pass
 
+
 class Development(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(getcwd(), 'overwatch_develop.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+        path.join(getcwd(), 'overwatch_develop.db')
+
 
 class Testing(Config):
     DEBUG = True

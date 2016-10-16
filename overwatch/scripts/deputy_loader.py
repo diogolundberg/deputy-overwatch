@@ -8,7 +8,7 @@ def update_deputies():
     xml_dict = scraper.parse_xml(url)[0]
 
     deputies = xml_dict['listaDeputado']['deputado']
-    
+
     if isinstance(deputies, dict):
         deputies = [deputies]
 

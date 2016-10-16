@@ -10,11 +10,13 @@ app.config.from_object('config.' + getenv('ENV', 'Development'))
 
 db = SQLAlchemy(app)
 
+
 def register_blueprints(package):
     package_dir = path.join(getcwd(), __name__, package)
     module_suffix = '_'+singularize(package)+'.py'
 
-    module_names = [sub('\.py$', '', c) for c in listdir(package_dir) if c.endswith(module_suffix)]
+    module_names = [sub('\.py$', '', c)
+                    for c in listdir(package_dir) if c.endswith(module_suffix)]
 
     for module_name in module_names:
         module = import_module(__name__ + '.%s.%s' % (package, module_name))

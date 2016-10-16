@@ -6,6 +6,7 @@ import aiohttp
 loop = asyncio.get_event_loop()
 semaphore = asyncio.Semaphore(5)
 
+
 def fetch_urls(urls, parser):
     async def fetch(url):
         with (await semaphore):
@@ -13,7 +14,8 @@ def fetch_urls(urls, parser):
             content = await response.read()
             await asyncio.sleep(1)
             if app.debug:
-                print('Fetch: {url} <Status {status}>'.format(url=url, status=response.status))
+                print('Fetch: {url} <Status {status}>'.format(
+                    url=url, status=response.status))
             return parser(content)
 
     urls_to_fetch = [fetch(url) for url in urls]
@@ -21,7 +23,7 @@ def fetch_urls(urls, parser):
     return parsed_urls
 
 
-def parse_xml(url, params = []):
+def parse_xml(url, params=[]):
     if not params:
         urls = [url]
     else:

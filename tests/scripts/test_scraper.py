@@ -5,7 +5,6 @@ from overwatch.models import Deputy, BudgetDate, Indemnity
 
 class ScraperTests(BaseTestCase):
 
-
     def setUp(self):
         deputy_loader.update_deputies()
         self.deputies = Deputy.query.all()
@@ -13,7 +12,6 @@ class ScraperTests(BaseTestCase):
         self.budget_dates = BudgetDate.query.all()
         indemnity_loader.update_indemnities(self.budget_dates)
         self.indemnities = Indemnity.query.all()
-
 
     def test_should_load_77_deputies(self):
         self.assertEqual(len(self.deputies), 77)
@@ -23,4 +21,3 @@ class ScraperTests(BaseTestCase):
 
     def test_should_load_7052_indemnities(self):
         self.assertEqual(len(self.indemnities), 7052)
-

@@ -5,6 +5,7 @@ from overwatch.models import Deputy, BudgetDate
 
 
 class Scrape(Command):
+
     "Scrape and load the ALMG data into the database (will take about 6 minutes)"
 
     def run(self):
@@ -14,8 +15,9 @@ class Scrape(Command):
         budget_date_loader.update_budget_dates(self.deputies)
         self.budget_dates = BudgetDate.query.all()
         indemnity_loader.update_indemnities(self.budget_dates)
-        
+
         minutes, seconds = divmod(time.time() - start_time, 60)
-        time_elapsed = '{:0>2} minutes and {:0>2} seconds'.format(int(minutes), int(seconds))
+        time_elapsed = '{:0>2} minutes and {:0>2} seconds'.format(
+            int(minutes), int(seconds))
 
         print("Data scrapped! (%s)" % time_elapsed)

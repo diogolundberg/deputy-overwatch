@@ -9,16 +9,16 @@ from decimal import Decimal
 blueprint = Blueprint('indemnity_api', __name__, url_prefix='/api/indemnities')
 
 
-
 @blueprint.route('/')
 def list():
     indemnities = [dict(i) for i in Indemnity.query.all()]
-    return jsonify(indemnities = indemnities), 200
+    return jsonify(indemnities=indemnities), 200
 
 
 args = {
     'top': fields.Integer(required=False)
 }
+
 
 @blueprint.route('/categories/deputies/')
 @use_args(args)
@@ -37,12 +37,13 @@ def categories_deputies(args):
         desc(func.sum(Indemnity.value))
     )
 
-    return jsonify(categories = parent_child_serialize(query, 'category', 'deputies', top))
+    return jsonify(categories=parent_child_serialize(query, 'category', 'deputies', top))
 
 
 def parent_child_serialize(query, parent_column, child_name, top=None):
     serializable = {}
-    columns = [c['name'] for c in query.column_descriptions if c['name'] != parent_column]
+    columns = [c['name']
+               for c in query.column_descriptions if c['name'] != parent_column]
 
     for result in query.all():
         row = [c for c in result]
@@ -51,7 +52,8 @@ def parent_child_serialize(query, parent_column, child_name, top=None):
 
         for item in row:
             child_column = columns[row.index(item)]
-            child[child_column] = float(item) if isinstance(item, Decimal) else item
+            child[child_column] = float(
+                item) if isinstance(item, Decimal) else item
 
         if parent_name in serializable:
             if not top or len(serializable[parent_name]) < top:

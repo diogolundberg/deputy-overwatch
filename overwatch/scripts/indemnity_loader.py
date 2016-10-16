@@ -5,7 +5,8 @@ from datetime import datetime
 
 
 def update_indemnities(budget_dates):
-    url = "http://dadosabertos.almg.gov.br/ws/prestacao_contas/verbas_indenizatorias/legislatura_atual/deputados/{deputy_id}/{year}/{month}"
+    url = "http://dadosabertos.almg.gov.br/ws/prestacao_contas/verbas_indenizatorias/" + \
+        "legislatura_atual/deputados/{deputy_id}/{year}/{month}"
     params = []
     for budget_date in budget_dates:
         params.append({
@@ -28,7 +29,8 @@ def update_indemnities(budget_dates):
             for budget in budgets:
                 indemnity = Indemnity()
                 indemnity.deputy_id = budget['idDeputado']
-                indemnity.date = datetime.strptime(budget['dataReferencia']['#text'], "%Y-%m-%d")
+                indemnity.date = datetime.strptime(
+                    budget['dataReferencia']['#text'], "%Y-%m-%d")
                 indemnity.category_id = budget['codTipoDespesa']
                 indemnity.value = budget['valor']
                 indemnity.category = budget['descTipoDespesa']
