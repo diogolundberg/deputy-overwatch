@@ -10,7 +10,12 @@ def update_budget_dates(deputies):
     xml_dicts = scraper.parse_xml(url, params)
 
     for xml_dict in xml_dicts:
-        budgets = [b for b in xml_dict['listaFechamentoVerba']['fechamentoVerba']]
+        final_budget = xml_dict['listaFechamentoVerba']['fechamentoVerba']
+        
+        if isinstance(final_budget, dict):
+            final_budget = [final_budget]
+        else:
+            budgets = [b for b in final_budget]
 
         for budget in budgets:
             budget_date = BudgetDate()
