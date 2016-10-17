@@ -1,0 +1,16 @@
+image: python:3.5
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq sqlite3 libsqlite3-dev
+  - pip install -r requirements.txt
+  
+  - python run.py db upgrade
+  - python run.py test
+
+pep8:
+  script:
+    - pep8 *
+
+test:
+  script:
+    - python run.py test
