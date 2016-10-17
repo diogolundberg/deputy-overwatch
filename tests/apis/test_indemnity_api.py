@@ -1,19 +1,16 @@
 from test_base import BaseTestCase
 from factories import IndemnityFactory
-from overwatch.models import Indemnity, Deputy
-from sqlalchemy import desc, func
-from decimal import Decimal
+from overwatch.models import Indemnity
 
 
 class IndemnityApiTests(BaseTestCase):
 
-    @classmethod
-    def setUpClass(cls):
+
+    def setUp(self):
         IndemnityFactory.create_batch(
             20, category='Single Category', category_id=1)
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         Indemnity.query.delete()
 
     def test_should_return_20_indemnities(self):

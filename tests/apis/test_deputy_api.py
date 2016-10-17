@@ -1,5 +1,6 @@
 from test_base import BaseTestCase
 from factories import DeputyFactory
+from overwatch.models import Indemnity, Deputy
 
 
 class DeputyApiTests(BaseTestCase):
