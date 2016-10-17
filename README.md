@@ -88,3 +88,7 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 ## Running tests ##
 
      python run.py test
+
+### **Check test coverage** ###
+     nosetests --with-coverage --cover-erase --cover-package=overwatch --cover-html
+  
