@@ -7,9 +7,14 @@ from decimal import Decimal
 
 class IndemnityApiTests(BaseTestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         IndemnityFactory.create_batch(
             20, category='Single Category', category_id=1)
+
+    @classmethod
+    def tearDownClass(cls):
+        Indemnity.query.delete()
 
     def test_should_return_20_indemnities(self):
         response = self.client.get("/api/indemnities/")

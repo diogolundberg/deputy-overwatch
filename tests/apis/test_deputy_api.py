@@ -4,8 +4,13 @@ from factories import DeputyFactory
 
 class DeputyApiTests(BaseTestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         DeputyFactory.create_batch(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        Deputy.query.delete()
 
     def test_should_return_10_deputies(self):
         response = self.client.get("/api/deputies/")
