@@ -5,14 +5,13 @@ from overwatch.models import Indemnity, Deputy
 
 class DeputyApiTests(BaseTestCase):
 
-    @classmethod
-    def setUpClass(cls):
+
+    def setUp(self):
         DeputyFactory.create_batch(10)
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         Deputy.query.delete()
-
+        
     def test_should_return_10_deputies(self):
         response = self.client.get("/api/deputies/")
         self.assertEqual(len(response.json['deputies']), 10)
