@@ -28,4 +28,3 @@ class DeputyLoaderTests(BaseTestCase):
     def test_should_overwrite_existing_data(self):
         deputy_loader.update_deputies()
         self.assertEqual(len(self.deputies), 77)
-
