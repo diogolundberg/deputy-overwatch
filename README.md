@@ -87,12 +87,4 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 
 ## Running tests ##
 
-I strongly recommend you to run:
-
-     nosetests --ignore-files=scraper
-
-This will ignore the scraper tests, saving a lot of time. The scraping can take up to 8 minutes!
-
-But, if you like to check **every single test**:
-
      python run.py test
