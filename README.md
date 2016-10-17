@@ -83,7 +83,7 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 
 * This project is set up to check pep8 offenses in a pipeline, install a good linter to save time 
 
-* Finally, the **most important**, run tests!
+* Finally, the **most important**, run tests! Try to use some good practices like TDD.
 
 ## Running tests ##
 
