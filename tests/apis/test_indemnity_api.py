@@ -1,8 +1,6 @@
 from test_base import BaseTestCase
 from factories import IndemnityFactory
-from overwatch.models import Indemnity, Deputy
-from sqlalchemy import desc, func
-from decimal import Decimal
+from overwatch.models import Indemnity
 
 
 class IndemnityApiTests(BaseTestCase):
@@ -10,6 +8,9 @@ class IndemnityApiTests(BaseTestCase):
     def setUp(self):
         IndemnityFactory.create_batch(
             20, category='Single Category', category_id=1)
+
+    def tearDown(self):
+        Indemnity.query.delete()
 
     def test_should_return_20_indemnities(self):
         response = self.client.get("/api/indemnities/")
@@ -48,7 +49,8 @@ class IndemnityApiTests(BaseTestCase):
     def test_indemnities_grouped_by_category_n_deputies_should_have_total_budget_on_deputies(self):
         response = self.client.get('/api/indemnities/categories/deputies/')
         deputy = response.json['categories']['Single Category']['deputies'][0]
-        self.assertTrue(set(['name', 'party', 'total_budget']).issubset(deputy.keys()))
+        self.assertTrue(
+            set(['name', 'party', 'total_budget']).issubset(deputy.keys()))
 
     def test_indemnities_grouped_by_category_n_deputies_top5_should_have_5_deputies_per_category(self):
         response = self.client.get(

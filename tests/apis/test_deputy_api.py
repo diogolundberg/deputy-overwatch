@@ -1,11 +1,15 @@
 from test_base import BaseTestCase
 from factories import DeputyFactory
+from overwatch.models import Indemnity, Deputy
 
 
 class DeputyApiTests(BaseTestCase):
 
     def setUp(self):
         DeputyFactory.create_batch(10)
+
+    def tearDown(self):
+        Deputy.query.delete()
 
     def test_should_return_10_deputies(self):
         response = self.client.get("/api/deputies/")
