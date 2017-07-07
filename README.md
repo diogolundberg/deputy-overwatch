@@ -53,7 +53,7 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 
 	Once this is complete, run the following to initialize your environment.
 
-        mkvirtualenv deputy-overwatch
+        mkvirtualenv --python=python3 deputy-overwatch
         workon deputy-overwatch
 
 3. Install the required Python libraries
@@ -64,17 +64,17 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 
        From the project's folder:
 
-        python run.py db upgrade
+        python manage.py db upgrade
 
 4. Scrape data to fill your database
 
        From the project's folder:
 
-        python run.py scrape
+        python manage.py scrape
 
 6. Run the site locally!
 
-        python run.py runserver
+        python manage.py runserver
 
 
 ## Contribution Guide ##
@@ -87,7 +87,7 @@ Checkout the Dependencies documentation: [wiki/Dependencies](https://bitbucket.o
 
 ## Running tests ##
 
-     python run.py test
+     python manage.py test
 
 ### Check test coverage ###
      nosetests --with-coverage --cover-erase --cover-package=overwatch --cover-html
