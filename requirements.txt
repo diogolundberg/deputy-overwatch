@@ -18,7 +18,7 @@ inflection==0.3.1
 ipaddress==1.0.17
 itsdangerous==2.0.1
 Jinja2==2.11.3
-Mako==1.0.4
+Mako==1.2.2
 MarkupSafe==0.23
 marshmallow==3.12.2
 multidict==4.5.2
