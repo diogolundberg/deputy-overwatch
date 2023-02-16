@@ -29,6 +29,6 @@ python-editor==1.0.1
 six==1.10.0
 SQLAlchemy==1.3.0
 webargs==5.5.3
-Werkzeug==2.0.1
+Werkzeug==2.2.3
 xmltodict==0.10.2
 yarl==1.3.0
